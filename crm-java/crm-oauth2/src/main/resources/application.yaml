@@ -1,5 +1,0 @@
-server:
-  port: ${sp.auth}
-spring:
-  application:
-    name: ${sn.auth}
