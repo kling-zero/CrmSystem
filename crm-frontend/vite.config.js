@@ -1,3 +1,13 @@
+/*
+ * @Author: sayoriqwq 2531600563@qq.com
+ * @Date: 2023-11-05 21:18:17
+ * @LastEditors: BINGWU HuJiaCheng2003@163.com
+ * @LastEditTime: 2023-11-09 22:34:56
+ * @FilePath: \crm-frontend\vite.config.js
+ * @Description:
+ *
+ * Copyright (c) 2023 by sayoriqwq 2531600563@qq.com, All Rights Reserved.
+ */
 import { fileURLToPath, URL } from 'node:url'
 import { defineConfig, loadEnv } from 'vite'
 import vue from '@vitejs/plugin-vue'
@@ -18,19 +28,23 @@ export default ({ mode }) =>
       port: 3000,
       https: false,
       proxy: {
+        // // 下载j3组文件
+        // '/api/file-server': {
+        //   changeOrigin: true,
+        //   target: 'http://8.130.45.222:8888',
+        //   rewrite: (path) => path.replace(/^\/api\/file-server/, '')
+        // },
         '/api': {
           changeOrigin: true,
           // target: 'http://localhost:10100',
           // rewrite: (path) => path.replace(/^\/api/, '')
-
-          //TODO[TEST_CODE]:使用ApiPost云MOCK
-          target:
-            'https://console-mock.apipost.cn/mock/99738a62-8857-4bb2-8010-c92424b03584',
+          target: 'http://8.130.30.150:10001',
           rewrite: (path) => path.replace(/^\/api/, '')
         },
         '/captcha': {
           changeOrigin: true,
-          target: 'http://localhost:10680',
+          // target: 'http://localhost:10680',
+          target: 'http://39.101.76.24:10200',
           rewrite: (path) => path.replace(/^\/captcha/, '')
         }
       }

@@ -30,7 +30,6 @@
 <script setup>
 import Request from '@/apis/request'
 import { ElMessage } from 'element-plus'
-
 // 使用FormData的方式上传文件
 function uploadUseFormData(params) {
   // 执行文件上传

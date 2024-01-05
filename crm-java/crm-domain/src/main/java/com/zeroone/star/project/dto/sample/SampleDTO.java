@@ -15,7 +15,7 @@ import lombok.Data;
  */
 @Data
 @ApiModel("示例传输数据对象")
-public class SampleDTO {
+public class  SampleDTO {
     @ApiModelProperty(value = "编号", example = "1")
     private Integer id;
     @ApiModelProperty(value = "姓名", example = "张三")

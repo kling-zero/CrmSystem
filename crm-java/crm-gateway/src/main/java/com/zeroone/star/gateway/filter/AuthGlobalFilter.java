@@ -2,15 +2,22 @@ package com.zeroone.star.gateway.filter;
 
 import cn.hutool.core.util.StrUtil;
 import com.nimbusds.jose.JWSObject;
+import com.zeroone.star.gateway.handler.CommonSender;
+import com.zeroone.star.project.constant.AuthConstant;
+import com.zeroone.star.project.constant.RedisConstant;
+import com.zeroone.star.project.vo.ResultStatus;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.core.Ordered;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
+import org.yaml.snakeyaml.util.UriEncoder;
 import reactor.core.publisher.Mono;
 
+import javax.annotation.Resource;
 import java.text.ParseException;
 
 /**
@@ -26,20 +33,29 @@ import java.text.ParseException;
 @Component
 @Slf4j
 public class AuthGlobalFilter implements GlobalFilter, Ordered {
+    @Resource
+    private RedisTemplate<String, Object> redisTemplate;
+
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
         String token = exchange.getRequest().getHeaders().getFirst("Authorization");
         if (StrUtil.isEmpty(token)) {
             return chain.filter(exchange);
         }
-        //TODO：判断凭证是否注销需要在此补充逻辑
+
+        String realToken = token.replace("Bearer ", "");
+
+        // 判断凭证是否注销
+        if (Boolean.FALSE.equals(redisTemplate.hasKey(RedisConstant.USER_TOKEN + ":" + realToken))) {
+            return CommonSender.sender(exchange, ResultStatus.UNAUTHORIZED, null);
+        }
+
         try {
             //从token中解析用户信息并设置到Header中去
-            String realToken = token.replace("Bearer ", "");
             JWSObject jwsObject = JWSObject.parse(realToken);
             String userStr = jwsObject.getPayload().toString();
             log.info("AuthGlobalFilter.filter() user:{}", userStr);
-            ServerHttpRequest request = exchange.getRequest().mutate().header("user", userStr).build();
+            ServerHttpRequest request = exchange.getRequest().mutate().header("user", UriEncoder.encode(userStr)).build();
             exchange = exchange.mutate().request(request).build();
         } catch (ParseException e) {
             e.printStackTrace();

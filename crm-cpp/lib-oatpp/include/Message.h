@@ -28,6 +28,8 @@
 #ifdef LINUX
 #define RS_UNAUTHORIZED ResultStatus("no login or token expired", 401)
 #define RS_FORBIDDEN ResultStatus("no permissions", 403)
+#define RS_PARAMS_SELECTABLE_ERROR ResultStatus("Upload Optional Parameters Exception", 9992)
+#define RS_PARAMS_EMPTY ResultStatus("upload parameter has null value", 9993)
 #define RS_SERVER_ERROR ResultStatus("server error", 9994)
 #define RS_PARAMS_INVALID ResultStatus("uploading parameters are abnormal", 9995)
 #define RS_CONTENT_TYPE_ERR ResultStatus("contenttype error", 9996)
@@ -38,6 +40,8 @@
 #else
 #define RS_UNAUTHORIZED ResultStatus(u8"暂未登录或TOKEN已经过期", 401)
 #define RS_FORBIDDEN ResultStatus(u8"没有相关权限", 403)
+#define RS_PARAMS_SELECTABLE_ERROR ResultStatus(u8"上传可选参数异常", 9992)
+#define RS_PARAMS_EMPTY ResultStatus(u8"上传参数有空值", 9993)
 #define RS_SERVER_ERROR ResultStatus(u8"服务器错误", 9994)
 #define RS_PARAMS_INVALID ResultStatus(u8"上传参数异常", 9995)
 #define RS_CONTENT_TYPE_ERR ResultStatus(u8"ContentType错误", 9996)

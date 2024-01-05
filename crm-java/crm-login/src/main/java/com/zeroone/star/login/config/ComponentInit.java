@@ -15,7 +15,8 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @ComponentScan({
         "com.zeroone.star.project.components.jwt",
-        "com.zeroone.star.project.components.user"
+        "com.zeroone.star.project.components.user",
+        "com.zeroone.star.project.config.redis"
 })
 public class ComponentInit {
 }

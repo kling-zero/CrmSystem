@@ -6,6 +6,7 @@ import com.zeroone.star.project.components.jwt.JwtComponent;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
+import org.yaml.snakeyaml.util.UriEncoder;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -44,6 +45,9 @@ public class UserHolder {
             //从token中解析用户信息并设置到Header中去
             String realToken = request.getHeader("Authorization").replace("Bearer ", "");
             userStr = jwtComponent.defaultRsaVerify(realToken);
+        }
+        else {
+            userStr = UriEncoder.decode(userStr);
         }
         JSONObject userJsonObject = new JSONObject(userStr);
         return UserDTO.builder()

@@ -1,13 +1,13 @@
 package com.zeroone.star.login.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.zeroone.star.login.entity.Menu;
-import com.zeroone.star.login.mapper.MenuMapper;
+import com.zeroone.star.login.entity.FlySysMenu;
+import com.zeroone.star.login.mapper.FlySysMenuMapper;
 import com.zeroone.star.login.service.IMenuService;
 import com.zeroone.star.project.utils.tree.TreeNode;
 import com.zeroone.star.project.utils.tree.TreeNodeMapper;
 import com.zeroone.star.project.utils.tree.TreeUtils;
-import com.zeroone.star.project.vo.login.MenuTreeVO;
+import com.zeroone.star.project.vo.j1.login.MenuTreeVO;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -22,23 +22,23 @@ import java.util.List;
  * @author 阿伟学长
  * @version 1.0.0
  */
-class MenuTreeNodMapper implements TreeNodeMapper<Menu> {
+class MenuTreeNodMapper implements TreeNodeMapper<FlySysMenu> {
     @Override
-    public TreeNode objectMapper(Menu menu) {
+    public TreeNode objectMapper(FlySysMenu flySysMenu) {
         MenuTreeVO treeNode = new MenuTreeVO();
         // 首先设置TreeNode计算层数使用属性
-        treeNode.setTnId(menu.getId().toString());
-        if (menu.getParentMenuId() == null) {
+        treeNode.setTnId(flySysMenu.getId());
+        if (flySysMenu.getParentid() == null) {
             treeNode.setTnPid(null);
         } else {
-            treeNode.setTnPid(menu.getParentMenuId().toString());
+            treeNode.setTnPid(flySysMenu.getParentid());
         }
         // 设置扩展属性
-        treeNode.setId(menu.getId());
-        treeNode.setIcon(menu.getIcon());
-        treeNode.setText(menu.getName());
-        treeNode.setHref(menu.getPath());
-        treeNode.setPid(menu.getParentMenuId());
+        treeNode.setId(flySysMenu.getId());
+        treeNode.setIcon(flySysMenu.getIcon());
+        treeNode.setText(flySysMenu.getName());
+        treeNode.setHref(flySysMenu.getUrl());
+        treeNode.setPid(flySysMenu.getParentid());
         return treeNode;
     }
 }
@@ -50,16 +50,16 @@ class MenuTreeNodMapper implements TreeNodeMapper<Menu> {
  * @author 阿伟
  */
 @Service
-public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements IMenuService {
+public class MenuServiceImpl extends ServiceImpl<FlySysMenuMapper, FlySysMenu> implements IMenuService {
 
     @Override
     public List<MenuTreeVO> listMenuByRoleName(List<String> roleNames) {
         //1 定义一个存储数据库查询菜单数据的容器
-        List<Menu> menus = new ArrayList<>();
+        List<FlySysMenu> menus = new ArrayList<>();
         //2 遍历获取角色获取所有的菜单列表
         roleNames.forEach(roleName -> {
             //通过角色名获取菜单列表
-            List<Menu> tMenus = baseMapper.selectByRoleName(roleName);
+            List<FlySysMenu> tMenus = baseMapper.selectByRoleName(roleName);
             if (tMenus != null && !tMenus.isEmpty()) {
                 menus.addAll(tMenus);
             }

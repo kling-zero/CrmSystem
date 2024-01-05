@@ -1,8 +1,8 @@
 package com.zeroone.star.login.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.zeroone.star.login.entity.Menu;
-import com.zeroone.star.project.vo.login.MenuTreeVO;
+import com.zeroone.star.login.entity.FlySysMenu;
+import com.zeroone.star.project.vo.j1.login.MenuTreeVO;
 
 import java.util.List;
 
@@ -12,7 +12,7 @@ import java.util.List;
  * </p>
  * @author 阿伟
  */
-public interface IMenuService extends IService<Menu> {
+public interface IMenuService extends IService<FlySysMenu> {
     /**
      * 通过角色名称获取，菜单资源
      * @param roleNames 角色名称

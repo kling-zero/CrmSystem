@@ -33,7 +33,7 @@ public class TreeUtils {
         List<T> tree = new ArrayList<>();
         // 3 循环获取根节点
         for (TreeNode node : nodes) {
-            if (null == node.tnPid) {
+            if (0 == node.tnPid) {
                 node.setTnDepth(0);
                 tree.add((T) node);
                 // 查找子节点

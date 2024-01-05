@@ -40,6 +40,14 @@
         <module>crm-gateway</module>
         <module>crm-login</module>
         <module>crm-doc</module>
+        <module>crm-systemindex</module>
+        <module>crm-systemmanagement</module>
+        <module>crm-j2-orgstructure</module>
+        <module>crm-j2-purchasemanagement</module>
+        <module>crm-j3-warehouse</module>
+        <module>crm-j3-area</module>
+        <module>crm-j3-ownerindex</module>
+        <module>crm-j4-commodity</module>
     </modules>
     <properties>
         <!-- 打包的时候忽略测试案例调用 -->

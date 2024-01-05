@@ -15,7 +15,10 @@
           style="width: 100%; height: 100%; display: block"
         />
         <div class="verify-refresh" @click="refresh" v-show="showRefresh">
-          <i class="iconfont icon-refresh"></i>
+          <i
+            class="iconfont icon-refresh big"
+            style="margin-right: 30px; top: -5px"
+          ></i>
         </div>
         <transition name="tips">
           <span
@@ -62,6 +65,7 @@
           <i
             :class="['verify-icon iconfont', iconClass]"
             :style="{ color: iconColor }"
+            style="margin-right: 15px"
           ></i>
           <div
             v-if="type === '2'"
@@ -467,3 +471,12 @@ export default {
   }
 }
 </script>
+<style scoped>
+.big::before {
+  position: relative;
+  top: 5px;
+  left: -18px;
+  width: 30px;
+  height: 30px;
+}
+</style>

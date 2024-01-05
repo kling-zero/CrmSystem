@@ -24,16 +24,16 @@ public class SecurityUser extends org.springframework.security.core.userdetails.
     /**
      * 关联一个用户对象
      */
-    private User user;
+    private FlySysUser flySysUser;
 
     /**
      * 构造初始化
      *
-     * @param user        数据库的User对象
+     * @param flySysUser        数据库的User对象
      * @param authorities 权限列表
      */
-    public SecurityUser(User user, Collection<? extends GrantedAuthority> authorities) {
-        super(user.getUsername(), user.getPassword(), authorities);
-        this.user = user;
+    public SecurityUser(FlySysUser flySysUser, Collection<? extends GrantedAuthority> authorities) {
+        super(flySysUser.getAccount(), flySysUser.getPassword(), authorities);
+        this.flySysUser = flySysUser;
     }
 }

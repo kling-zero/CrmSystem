@@ -76,7 +76,7 @@ CREATE TABLE `cst_field_ext` (
   `show_name` varchar(256) NOT NULL DEFAULT '' COMMENT '字段表单名称',
   `field_name` varchar(256) NOT NULL DEFAULT '' COMMENT '字段名称',
   `field_type` varchar(50) NOT NULL DEFAULT '' COMMENT '单文本=varchar,文本=text,多行文本=textarea,整数=int,小数=float,图片=img,下拉=option,单选=radio,复选=checkbox',
-  `default` varchar(256) NOT NULL DEFAULT '' COMMENT '字段默认值',
+  `default_value` varchar(256) NOT NULL DEFAULT '' COMMENT '字段默认值',
   `maxlength` varchar(256) NOT NULL DEFAULT '' COMMENT '最大值',
   `desc` varchar(256) NOT NULL DEFAULT '' COMMENT '表单说明',
   `visible` smallint(1) NOT NULL DEFAULT '1' COMMENT '是否使用',
@@ -691,8 +691,18 @@ CREATE TABLE `fly_sys_menu` (
   `parentID` int(4) NOT NULL DEFAULT '0',
   `sort` int(4) NOT NULL DEFAULT '0',
   `visible` int(2) NOT NULL DEFAULT '0',
+  `icon` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='系统菜单栏目';
+
+-- zocrm_sys.fly_sys_role_menu definition
+
+CREATE TABLE `fly_sys_role_menu` (
+  `id` int unsigned NOT NULL AUTO_INCREMENT,
+  `role_id` int unsigned DEFAULT NULL,
+  `menu_id` int unsigned DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=67 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='角色菜单关联表';
 
 CREATE TABLE `fly_sys_message` (
   `id` int(16) NOT NULL AUTO_INCREMENT,

@@ -21,12 +21,12 @@ public class TreeNode implements Serializable {
      * 唯一ID
      */
     @Setter
-    protected String tnId;
+    protected Integer tnId;
     /**
      * 节点父节点ID
      */
     @Setter
-    protected String tnPid;
+    protected Integer tnPid;
     /**
      * 节点深度
      */

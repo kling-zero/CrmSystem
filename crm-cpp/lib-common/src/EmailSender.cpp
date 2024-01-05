@@ -115,7 +115,7 @@ EmailSender::EmailSender(const std::string& smtp_server,
 	const std::string& charset/* = "gb2312"*/)
 {
 	// ≥ı ºªØ…Ë÷√
-	m_smtp_url = "smtp://" + smtp_server + ':' + std::to_string(smtp_port);
+	m_smtp_url = "smtps://" + smtp_server + ':' + std::to_string(smtp_port);
 	m_from = std::make_pair(from_email, from_name);
 	m_password = password;
 	setCharset(charset);

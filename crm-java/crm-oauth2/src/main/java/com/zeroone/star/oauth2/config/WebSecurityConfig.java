@@ -28,8 +28,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 // 内置端点请求放行
                 .requestMatchers(EndpointRequest.toAnyEndpoint()).permitAll()
-                // 公钥获取放行
-                .antMatchers("/rsa/public-key").permitAll()
+                // 公钥获取放行 - 刷新redis权限放行
+                .antMatchers("/rsa/public-key", "/refresh-method-role-map").permitAll()
                 // 其他请求需要已认证才能访问
                 .anyRequest().authenticated();
     }

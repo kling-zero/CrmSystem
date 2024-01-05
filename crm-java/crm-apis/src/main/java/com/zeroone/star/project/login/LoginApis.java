@@ -1,10 +1,10 @@
 package com.zeroone.star.project.login;
 
-import com.zeroone.star.project.dto.login.LoginDTO;
-import com.zeroone.star.project.dto.login.Oauth2TokenDTO;
+import com.zeroone.star.project.dto.j1.login.LoginDTO;
+import com.zeroone.star.project.dto.j1.login.Oauth2TokenDTO;
 import com.zeroone.star.project.vo.JsonVO;
-import com.zeroone.star.project.vo.login.LoginVO;
-import com.zeroone.star.project.vo.login.MenuTreeVO;
+import com.zeroone.star.project.vo.j1.login.LoginVO;
+import com.zeroone.star.project.vo.j1.login.MenuTreeVO;
 
 import java.util.List;
 

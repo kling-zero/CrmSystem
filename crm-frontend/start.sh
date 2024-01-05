@@ -1,5 +1,5 @@
 #!bin/bash
-nginx_dir='/home/nginx/html'
+nginx_dir='/root/nginx/html'
 docker stop nginx
 echo '----stop nginx----'
 rm -rf ${nginx_dir}

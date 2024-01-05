@@ -1,9 +1,9 @@
 package com.zeroone.star.oauth2.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.zeroone.star.oauth2.entity.Role;
+import com.zeroone.star.oauth2.entity.FlySysRole;
+import com.zeroone.star.oauth2.entity.FlySysUser;
 import com.zeroone.star.oauth2.entity.SecurityUser;
-import com.zeroone.star.oauth2.entity.User;
 import com.zeroone.star.oauth2.service.IRoleService;
 import com.zeroone.star.oauth2.service.IUserService;
 import com.zeroone.star.project.constant.AuthConstant;
@@ -43,19 +43,19 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         String clientId = request.getParameter("client_id");
         if (AuthConstant.CLIENT_MANAGER.equals(clientId)) {
             //1 通过用户名查找用户对象
-            User user = new User();
-            user.setUsername(username);
-            user = userService.getOne(new QueryWrapper<>(user));
-            if (user == null) {
+            FlySysUser flySysUser = new FlySysUser();
+            flySysUser.setAccount(username);
+            flySysUser = userService.getOne(new QueryWrapper<>(flySysUser));
+            if (flySysUser == null) {
                 throw new UsernameNotFoundException("用户名或密码错误");
             }
             //2 通过用户ID获取角色列表
-            List<Role> roles = roleService.listRoleByUserId(user.getId());
+            List<FlySysRole> roles = roleService.listRoleByUserId(flySysUser.getId());
             //3 将数据库角色转换成Security权限对象
             List<GrantedAuthority> authorities = new ArrayList<>();
-            roles.forEach(role -> authorities.add(new SimpleGrantedAuthority(role.getKeyword())));
+            roles.forEach(role -> authorities.add(new SimpleGrantedAuthority(role.getName())));
             //4 构建权限角色对象
-            return new SecurityUser(user, authorities);
+            return new SecurityUser(flySysUser, authorities);
         } else if (AuthConstant.CLIENT_APP.equals(clientId)) {
             throw new UsernameNotFoundException("用户端查找用户尚未实现");
         }

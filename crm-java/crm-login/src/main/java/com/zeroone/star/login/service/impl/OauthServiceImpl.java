@@ -1,7 +1,7 @@
 package com.zeroone.star.login.service.impl;
 
 import com.zeroone.star.login.service.OauthService;
-import com.zeroone.star.project.dto.login.Oauth2TokenDTO;
+import com.zeroone.star.project.dto.j1.login.Oauth2TokenDTO;
 import com.zeroone.star.project.vo.JsonVO;
 import lombok.AllArgsConstructor;
 

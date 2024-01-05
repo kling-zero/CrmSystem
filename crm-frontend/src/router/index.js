@@ -1,3 +1,13 @@
+/*
+ * @Author: sayoriqwq 2531600563@qq.com
+ * @Date: 2023-10-25 22:24:51
+ * @LastEditors: sayoriqwq 2531600563@qq.com
+ * @LastEditTime: 2023-11-08 21:25:33
+ * @FilePath: \zero-one-crmsys\crm-frontend\src\router\index.js
+ * @Description:
+ *
+ * Copyright (c) 2023 by sayoriqwq 2531600563@qq.com, All Rights Reserved.
+ */
 import { createRouter, createWebHistory } from 'vue-router'
 import { ElMessage } from 'element-plus'
 import { userStore } from '../stores/user'
@@ -51,9 +61,9 @@ router.beforeEach(async function (to, from, next) {
     to.name === 'Login' ||
     to.name === 'NotFound' ||
     to.name === 'Forbidden' ||
-    to.name === 'Error' ||
-    // TODO[TEST_CODE]: 放行示例模块访问
-    to.path.indexOf('sample') !== -1
+    to.name === 'Error'
+    // // TODO[TEST_CODE]: 放行示例模块访问
+    // to.path.indexOf('sample') !== -1
   ) {
     next()
     return
@@ -70,7 +80,7 @@ router.beforeEach(async function (to, from, next) {
       // 加载用户信息
       await store.loadUser()
       // 加载菜单资源
-      await store.loadMenus()
+      // await store.loadMenus()
       // 设置加载完毕
       store.setLoaded(true)
     }

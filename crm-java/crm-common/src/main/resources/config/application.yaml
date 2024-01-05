@@ -5,6 +5,11 @@ application:
   company: 01星球
 
 spring:
+  mybatis-plus:
+    configuration:
+      #    开启驼峰配置
+      map-underscore-to-camel-case: true
+  spring:
   # 全局jackson配置
   jackson:
     default-property-inclusion: non_null

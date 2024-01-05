@@ -1,8 +1,17 @@
+/*
+ * @Author: BINGWU
+ * @Date: 2023-10-26 20:52:05
+ * @LastEditors: BINGWU HuJiaCheng2003@163.com
+ * @LastEditTime: 2023-11-09 18:17:30
+ * @FilePath: \crm-frontend\src\apis\login\index.js
+ * @Describe:
+ * @Mark: ૮(˶ᵔ ᵕ ᵔ˶)ა
+ */
 import Request from '../request'
 import { userStore } from '@/stores/user'
 
 // 定义一个功能模块基础url，方便替换
-const currBaseUrl = '/login/'
+const currBaseUrl = '/login'
 
 /**
  * 登录接口
@@ -12,11 +21,15 @@ const currBaseUrl = '/login/'
  */
 export const login = (data, success, fail) => {
   const $store = userStore()
-  Request.requestForm(Request.POST, currBaseUrl + 'auth-login', data)
-    .then((data) => {
+  Request.requestForm(Request.POST, currBaseUrl + '/auth-login', data)
+    .then((res) => {
+      console.log('res', res)
+      //这里需要处理token
       // 记录Token到本地
-      if (data.data) {
-        $store.setToken(data.data)
+      if (res.data) {
+        $store.setToken(res.data)
+        $store.loadMenus()
+        $store.loadUser()
         // 执行成功回调
         success()
         return
@@ -31,3 +44,5 @@ export const login = (data, success, fail) => {
       fail()
     })
 }
+
+export {}

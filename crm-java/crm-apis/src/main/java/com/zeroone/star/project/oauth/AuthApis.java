@@ -1,6 +1,6 @@
 package com.zeroone.star.project.oauth;
 
-import com.zeroone.star.project.dto.login.Oauth2TokenDTO;
+import com.zeroone.star.project.dto.j1.login.Oauth2TokenDTO;
 import com.zeroone.star.project.vo.JsonVO;
 
 import java.security.Principal;

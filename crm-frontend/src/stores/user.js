@@ -1,134 +1,27 @@
 import { defineStore } from 'pinia'
 import Request from '@/apis/request'
-// 测试菜单数据
-let testMenus = [
-  {
-    id: 1,
-    text: '系统管理',
-    icon: 'IconSetting',
-    children: [
-      {
-        id: 2,
-        text: '系统管理1',
-        href: '/un-1',
-        icon: 'IconSetting',
-        pid: 1
-      },
-      {
-        id: 3,
-        text: '系统管理2',
-        href: '/un-2',
-        icon: 'IconSetting',
-        pid: 1
-      },
-      {
-        id: 4,
-        text: '系统管理3',
-        href: '/un-3',
-        icon: 'IconSetting',
-        pid: 1
-      },
-      {
-        id: 5,
-        text: '系统管理4',
-        href: '/un-4',
-        icon: 'IconSetting',
-        pid: 1
-      },
-      {
-        id: 6,
-        text: '系统管理5',
-        href: '/un-5',
-        icon: 'IconSetting',
-        pid: 1
-      }
-    ]
-  },
-  {
-    id: 2,
-    text: '用户管理',
-    icon: 'IconUser',
-    children: [
-      {
-        id: 2,
-        text: '用户管理1',
-        href: '/un-11',
-        icon: 'IconUser',
-        pid: 2
-      },
-      {
-        id: 3,
-        text: '用户管理2',
-        href: '/un-12',
-        icon: 'IconUser',
-        pid: 2
-      },
-      {
-        id: 4,
-        text: '用户管理3',
-        href: '/un-13',
-        icon: 'IconUser',
-        pid: 2
-      },
-      {
-        id: 5,
-        text: '用户管理4',
-        href: '/un-14',
-        icon: 'IconUser',
-        pid: 2
-      },
-      {
-        id: 6,
-        text: '用户管理5',
-        href: '/un-15',
-        icon: 'IconUser',
-        pid: 2
-      }
-    ]
-  },
-  {
-    id: 3,
-    text: '订单管理',
-    icon: 'IconTickets',
-    children: [
-      {
-        id: 2,
-        text: '订单管理1',
-        href: '/un-21',
-        icon: 'IconTickets',
-        pid: 3
-      },
-      {
-        id: 3,
-        text: '订单管理2',
-        href: '/un-22',
-        icon: 'IconTickets',
-        pid: 3
-      },
-      {
-        id: 4,
-        text: '订单管理3',
-        href: '/un-23',
-        icon: 'IconTickets',
-        pid: 3
-      },
-      {
-        id: 5,
-        text: '订单管理4',
-        href: '/un-24',
-        icon: 'IconTickets',
-        pid: 3
-      },
-      {
-        id: 6,
-        text: '订单管理5',
-        href: '/un-25',
-        icon: 'IconTickets',
-        pid: 3
-      }
-    ]
-  }
-]
+
+// import inventory from './menus/inventory'
+// import homepage from './menus/homepage'
+// import system from './menus/system'
+// import organization from './menus/organization'
+// import basicData from './menus/basicData'
+// import customer from './menus/customer'
+// import sale from './menus/sale'
+// import fund from './menus/fund'
+// import supplier from './menus/supplier'
+// // 测试菜单数据
+// let testMenus = [
+//   homepage,
+//   system,
+//   organization,
+//   basicData,
+//   customer,
+//   sale,
+//   inventory,
+//   fund,
+//   supplier
+// ]
 
 export const userStore = defineStore('user', {
   state: () => ({
@@ -141,7 +34,7 @@ export const userStore = defineStore('user', {
     // 保存当前用户
     user: null,
     // 菜单数据
-    menus: []
+    menus: null
   }),
   getters: {
     // 获取token
@@ -159,9 +52,8 @@ export const userStore = defineStore('user', {
       // 发送获取当前用户信息请求
       let data = await Request.requestForm(
         Request.GET,
-        '/login/current-user',
-        null
-      )
+        '/login/current-user'
+      ).catch((e) => e)
       this.user = data.data
     },
     // 加载菜单
@@ -170,12 +62,9 @@ export const userStore = defineStore('user', {
       //this.menus = testMenus
 
       // 发送获取菜单请求
-      let data = await Request.requestForm(
-        Request.GET,
-        '/login/get-menus',
-        null
-      )
+      let data = await Request.requestForm(Request.GET, '/login/get-menus')
       this.menus = data.data
+      console.log('loadmenu', data)
     },
     // 加载刷新凭证
     loadRefreshToken() {
@@ -209,6 +98,7 @@ export const userStore = defineStore('user', {
       localStorage.setItem('token', this.token)
       localStorage.setItem('refreshToken', this.refreshToken)
     },
+
     // 重置数据
     resetSaveData() {
       this.loaded = false

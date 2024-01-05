@@ -15,4 +15,8 @@ public interface RedisConstant {
      * 角色资源映射Map的key
      */
     String RESOURCE_ROLES_MAP = "AUTH:RESOURCE_ROLES";
+    /***
+     * 用户token存入Redis的Key前缀
+     */
+    String USER_TOKEN = "AUTH:USER_TOKEN";
 }

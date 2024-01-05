@@ -22,11 +22,14 @@ import '@wangeditor/editor/dist/css/style.css' // 引入 css
 import { onBeforeUnmount, ref, shallowRef, onMounted } from 'vue'
 import { Editor, Toolbar } from '@wangeditor/editor-for-vue'
 import { ElMessage } from 'element-plus'
+import { DomEditor } from '@wangeditor/editor'
+
 // 编辑器实例，必须用 shallowRef
 const editorRef = shallowRef()
 const mode = 'default' // 或 'simple'
 // 内容HTML
 const valueHtml = ref(`<p>你好，富文本编辑器</p>`)
+
 // 模拟ajax异步获取内容
 onMounted(() => {
   setTimeout(() => {
@@ -41,6 +44,42 @@ onBeforeUnmount(() => {
 })
 // 组件相关配置
 const toolbarConfig = {}
+
+toolbarConfig.toolbarKeys = [
+  // 菜单 key
+  'headerSelect',
+
+  // 分割线
+  '|',
+
+  // 菜单 key
+  'bold',
+  'italic',
+  'color',
+  'underline',
+  'fontSize',
+  'fontFamily',
+  'lineHeight',
+  'emotion',
+
+  // 菜单组，包含多个菜单
+  {
+    key: 'group-more-style', // 必填，要以 group 开头
+    title: '更多样式', // 必填
+    iconSvg: '<svg>....</svg>', // 可选
+    menuKeys: ['through', 'code', 'clearStyle'] // 下级菜单 key ，必填
+  }
+  // 继续配置其他菜单...
+]
+//要排除哪个，就写哪个
+toolbarConfig.excludeKeys = [
+  'group-more-style' // 排除菜单组，写菜单组 key 的值即可
+]
+//菜单插入的位置
+// toolbarConfig.insertKeys = {
+//   index: 2 // 插入的位置，基于当前的 toolbarKeys
+// }
+
 const editorConfig = {
   placeholder: '请输入内容...',
   MENU_CONF: {
@@ -71,6 +110,9 @@ const editorConfig = {
 // 编辑器创建回调
 const handleCreated = (editor) => {
   editorRef.value = editor // 记录 editor 实例，重要！
+  setTimeout(() => {
+    console.log('111', DomEditor.getToolbar(editor).getConfig())
+  })
 }
 // 编辑器内容发生变化
 const handleChange = (editor) => {

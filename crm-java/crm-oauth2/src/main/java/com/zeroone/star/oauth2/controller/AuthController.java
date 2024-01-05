@@ -1,6 +1,6 @@
 package com.zeroone.star.oauth2.controller;
 
-import com.zeroone.star.project.dto.login.Oauth2TokenDTO;
+import com.zeroone.star.project.dto.j1.login.Oauth2TokenDTO;
 import com.zeroone.star.project.oauth.AuthApis;
 import com.zeroone.star.project.vo.JsonVO;
 import com.zeroone.star.project.vo.ResultStatus;

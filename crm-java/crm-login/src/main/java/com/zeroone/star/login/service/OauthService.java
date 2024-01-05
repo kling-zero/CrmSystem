@@ -1,7 +1,7 @@
 package com.zeroone.star.login.service;
 
 import com.zeroone.star.login.fallback.OauthServiceFallbackFactory;
-import com.zeroone.star.project.dto.login.Oauth2TokenDTO;
+import com.zeroone.star.project.dto.j1.login.Oauth2TokenDTO;
 import com.zeroone.star.project.vo.JsonVO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;

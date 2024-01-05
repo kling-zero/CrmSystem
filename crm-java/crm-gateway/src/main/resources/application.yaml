@@ -46,3 +46,4 @@ secure:
       - "/auth/oauth/token"
       - "/login/auth-login"
       - "/login/refresh-token"
+      - "/captcha/**"
